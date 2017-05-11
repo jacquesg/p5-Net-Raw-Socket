@@ -1,0 +1,15 @@
+Socket				T_GIT_REF
+
+OUTPUT
+T_GIT_REF
+	sv_setref_pv($arg, \"Net::Raw::${(my $ntt = $ntype) =~ s/_/::/g;\$ntt}\", (void *) $var);
+
+INPUT
+T_GIT_REF
+	if (sv_isobject($arg) &&
+	    sv_derived_from($arg, \"Net::Raw::${(my $ntt = $ntype) =~ s/_/::/g;\$ntt}\")) {
+		$var = INT2PTR($type, SvIV((SV *) SvRV($arg)));
+	} else {
+		$var = NULL;
+		croak(\"$var is not of type Net::Raw::${(my $ntt = $ntype) =~ s/_/::/g;\$ntt}\");
+	}
